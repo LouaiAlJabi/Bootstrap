@@ -65,6 +65,16 @@ def ObjectSplit(object, num_chunks,list=True):
         return chunks
 
 def MergeResultedList(resultedList):
+    """
+    The Function takes in the resulted list of numpy arrays or other iterables from the multiprocessing code, 
+    and merges them into a singular list with the results from each bootstrap.
+
+    Args:
+        resultedDict (List): A list containing iterables
+
+    Returns:
+        List: a list containing all the results from the bootstraps
+    """
     holder = [[] for i in range(len(resultedList[0][0]))]
     for i in resultedList:
         for j in i:
@@ -75,6 +85,16 @@ def MergeResultedList(resultedList):
     return finalHolder
 
 def MergeResultedDict(resultedDict):
+    """
+    The Function takes in the resulted list of dictionaries from the multiprocessing code, 
+    and merges them into a singular dictionary with the results from each bootstrap.
+
+    Args:
+        resultedDict (List): A list containing dictionaries
+
+    Returns:
+        Dict: a dictionary containing all the results from the bootstraps
+    """
     holderDict = defaultdict(list)
     for list_ in resultedDict:
         for dict in list_:
@@ -86,10 +106,27 @@ def MergeResultedDict(resultedDict):
         finalHolder[key] = np.array(value)
     return finalHolder
 
-def ConfInterval(data,confInt,boots):
+def ConfInterval(data = np.ndarray,confInt = float,boots = int):
+    """
+    This function takes in a numpy array and returns the confidence interval. 
+    Works on an array of scalers, as well as, multi-dimensional arrays. 
+    When working with multi-dimensional arrays, the function transposes 
+    the array to compute the confidence interval element wise.
+
+    If the data given is a dictionary, the function returns None
+
+    Args:
+        data (ndarray): a numpy array of scalers or vectors
+        confInt (float): the confidence
+        boots (int): the number of bootstraps that have been conducted
+
+    Warnings:
+        This Function Does not Accept Dictionaries. Returning None
+    Returns:
+        tuple: a tuple of the upper and lower bounds
+    """
     confIdx = int((1-confInt)/2 * boots) - 1
     confInterval = []
-    print(type(data[0]))
     if isinstance(data[0], dict):
         warn("This Function Does not Accept Dictionaries. Returning None")
         return None
@@ -153,7 +190,6 @@ def Bootstrap(userFunction,dataSet = np.array,boots = int,seed = None,cores = in
     """
     print("started")
     #default values and check for invalid data
-    
     if (dataSet.ndim == 1):
         raise ValueError("Please use a multi dimensional array")
 
@@ -173,12 +209,11 @@ def Bootstrap(userFunction,dataSet = np.array,boots = int,seed = None,cores = in
 
     print("start mp")
     list_ = []
-    with cf.ProcessPoolExecutor(cores) as exe:
+    with cf.ProcessPoolExecutor(max_workers = cores) as exe:
         futures = [exe.submit(innerBootstrap,userFunction,dataSet,bootSplits[i],seedList[i],num_sims,sampledAxis,**kwargs) 
                    for i in range(cores)] # we want to pass in the seeds instead, so that the number of seeds and cores match
         for future in cf.as_completed(futures):
             list_.append(future.result())
-
     
     print("merge the results and compute confidence interval")
     confInt = 0.95 if confInt is None else confInt
@@ -201,4 +236,3 @@ def Bootstrap(userFunction,dataSet = np.array,boots = int,seed = None,cores = in
             finalResults.append(bootResults)
             
     return tuple(finalResults)
-
