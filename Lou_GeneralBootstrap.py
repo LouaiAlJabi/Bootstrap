@@ -1,4 +1,3 @@
-import mori_zwanzig as mz
 import numpy as np
 import time as tm
 import concurrent.futures as cf
