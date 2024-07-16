@@ -1,4 +1,3 @@
-import Lou_Bootstrap as bs
 import mori_zwanzig as mz
 import numpy as np
 import time as tm
