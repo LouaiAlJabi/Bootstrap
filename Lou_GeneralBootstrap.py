@@ -27,13 +27,12 @@ def GenSamples(num,num_sims,seed):
     
 def GenOneSample(num_sims):
     """
-    Generates a 'num' amount of samples and renum_simsturns the results as a list of all the samples.
+    Generates a single list of samples.
     Args:
         num_sims (int): number of simulations, determined by the data provided. (size of array)
-        seed (int): The seed for randomizing
 
     Returns:
-        list: a list of lists, each containing a sample portion
+        list: a list of samples
     """    
     
     sample = np.random.choice(range(num_sims), size = num_sims,replace = True)
