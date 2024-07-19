@@ -1,0 +1,4 @@
+numpy @ file:///Users/runner/miniforge3/conda-bld/numpy_1718615046996/work/dist/numpy-2.0.0-cp312-cp312-macosx_11_0_arm64.whl#sha256=de367a79f06171f5fc0272ef25bafee6b121602c0a36fddf9ee8d4cc91adcc69
+scipy @ file:///Users/runner/miniforge3/conda-bld/scipy-split_1720323036805/work/dist/scipy-1.14.0-cp312-cp312-macosx_11_0_arm64.whl#sha256=4dc2cc77a13e35a546cbaf75a468ffd4e88e151f8eb277028207792f3cddd219
+setuptools==71.0.1
+wheel==0.43.0
