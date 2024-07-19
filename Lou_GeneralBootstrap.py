@@ -4,7 +4,6 @@ import concurrent.futures as cf
 import pickle
 from collections import defaultdict
 from warnings import warn
-from sklearn.linear_model import LinearRegression
 from scipy import stats
 
 def GenSamples(num,num_sims,seed):
