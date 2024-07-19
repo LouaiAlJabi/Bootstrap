@@ -3,6 +3,12 @@
 This repository contains Python code for performing bootstrap resampling and statistical analysis using multiprocessing. The code is designed to handle multi-dimensional data structures and utilizes parallel processing to efficiently compute results.
 
 **Installation:**
+```bash
+git clone https://github.com/LouaiAlJabi/Bootstrap.git
+cd Bootstrap
+
+pip install -r requirements.txt
+```
 **Dependancies:**
 numpy (np)
 time (tm)
