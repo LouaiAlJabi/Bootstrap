@@ -8,7 +8,7 @@ from scipy import stats
 
 def GenSamples(num,num_sims,seed):
     """
-    Generates a 'num' amount of samples and renum_simsturns the results as a list of all the samples.
+    Generates a 'num' amount of samples and returns the results as a list of all the samples.
     Args:
         num (int): The resulting number of samples
         num_sims (int): number of simulations, determined by the data provided
@@ -41,7 +41,7 @@ def GenOneSample(num_sims):
     
 def ObjectSplit(object, num_chunks,list=True):
     """
-    The Function takes in a object (number or iterable) and splits it into a given number of chunks.
+    The Function takes in an object (number or iterable) and splits it into a given number of chunks.
     Args:
         object (number or iterable): The object to split
         num_chunks (int): The number of chunks to split the object into
@@ -66,7 +66,7 @@ def MergeResultedList(resultedList):
     and merges them into a singular list with the results from each bootstrap.
 
     Args:
-        resultedDict (List): A list containing iterables
+        resultedList (List): A list containing iterables
 
     Returns:
         List: a list containing all the results from the bootstraps
